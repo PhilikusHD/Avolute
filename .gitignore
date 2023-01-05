@@ -14,8 +14,8 @@
 # Compiled Dynamic libraries
 *.so
 *.dylib
+!dependencies/
 *.dll
-!Dependencies/*.dll
 
 # Fortran module files
 *.mod
@@ -34,3 +34,5 @@
 
 # VS generated
 .vs/
+bin/
+bin-int/
