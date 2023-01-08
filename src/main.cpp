@@ -5,22 +5,9 @@
 #include <SDL_image.h>
 #include "Log.h"
 #include "RenderWindow.h"
+#include "Entity.h"
 
 // https://lazyfoo.net/tutorials/SDL/index.php#Optimized%20Surface%20Loading%20and%20Soft%20Stretching
-
-// Window size constants
-const int WINDOW_WIDTH = 1280;
-const int WINDOW_HEIGHT = 720;
-
-enum KeyPressSurface
-{
-	KEY_PRESS_SURFACE_DEFAULT,
-	KEY_PRESS_SURFACE_UP,
-	KEY_PRESS_SURFACE_DOWN,
-	KEY_PRESS_SURFACE_RIGHT,
-	KEY_PRESS_SURFACE_LEFT,
-	KEY_PRESS_SURFACE_TOTAL
-};
 
 int main(int argc, char* argv[])
 {
@@ -34,7 +21,10 @@ int main(int argc, char* argv[])
 	}
 
 	RenderWindow window("Avolute", 1280, 720);
+	SDL_Texture* grassTexture = window.loadTexture("res/Textures/ground_grass_1.png");
 	
+	Entity ground0(100, 69, grassTexture);
+
 	bool running = true;
 	SDL_Event event;
 
@@ -47,6 +37,10 @@ int main(int argc, char* argv[])
 				running = false;
 			}
 		}
+
+		window.clear();
+		window.render(ground0);
+		window.display();
 	}
 
 	window.cleanup();
