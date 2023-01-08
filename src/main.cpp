@@ -23,7 +23,13 @@ int main(int argc, char* argv[])
 	RenderWindow window("Avolute", 1280, 720);
 	SDL_Texture* grassTexture = window.loadTexture("res/Textures/ground_grass_1.png");
 	
-	Entity ground0(100, 69, grassTexture);
+	Entity entitees[3] = 
+	{
+		Entity(69, 100, grassTexture), 
+		Entity(42, 100, grassTexture),
+		Entity(100, 100, grassTexture)
+	};
+
 
 	bool running = true;
 	SDL_Event event;
@@ -39,7 +45,11 @@ int main(int argc, char* argv[])
 		}
 
 		window.clear();
-		window.render(ground0);
+		for (Entity& ent : entitees)
+		{
+			window.render(ent);
+		}
+
 		window.display();
 	}
 
