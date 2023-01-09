@@ -1,5 +1,5 @@
 #include "RenderWindow.h"
-#include "Log.h"
+#include "Utils.h"
 
 RenderWindow::RenderWindow(const char* title, int width, int height)
 	: m_Window(nullptr), m_Renderer(nullptr)
@@ -46,8 +46,8 @@ void RenderWindow::render(Entity& entity)
 	src.h = entity.GetCurrentFrame().h;
 
 	SDL_Rect dst;
-	dst.x = entity.GetX() * 4;
-	dst.y = entity.GetY() * 4;
+	dst.x = entity.getPos().m_x * 4;
+	dst.y = entity.getPos().m_y * 4;
 	dst.w = entity.GetCurrentFrame().w * 4;
 	dst.h = entity.GetCurrentFrame().h * 4;
 

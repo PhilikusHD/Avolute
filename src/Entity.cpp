@@ -1,7 +1,7 @@
 #include "Entity.h"
 
-Entity::Entity(float x, float y, SDL_Texture* tex)
-	: x(x), y(y), tex(tex)
+Entity::Entity(Vector2f pos, SDL_Texture* tex)
+	:m_pos(pos), m_tex(tex)
 {
 	currentFrame.x = 0;
 	currentFrame.y = 0;
@@ -9,19 +9,9 @@ Entity::Entity(float x, float y, SDL_Texture* tex)
 	currentFrame.h = 32;
 }
 
-float Entity::GetX()
-{
-	return x;
-}
-
-float Entity::GetY()
-{
-	return y;
-}
-
 SDL_Texture* Entity::GetTexture()
 {
-	return tex;
+	return m_tex;
 }
 
 SDL_Rect Entity::GetCurrentFrame()

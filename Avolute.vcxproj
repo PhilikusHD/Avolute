@@ -159,14 +159,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\AMath.cpp" />
     <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\RenderWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\AMath.h" />
     <ClInclude Include="include\Entity.h" />
-    <ClInclude Include="include\Log.h" />
     <ClInclude Include="include\RenderWindow.h" />
+    <ClInclude Include="include\Math.h" />
+    <ClInclude Include="include\Utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,4 @@
-#ifndef __LOG_H__
-#define __LOG_H__
-
+#include <SDL.h>
 #include <stdio.h>
 
 #define DEBUG 1
@@ -11,4 +9,13 @@
 #define Log(...) ;
 #endif
 
-#endif
+namespace Utils
+{
+	inline float hireTimeInSeconds()
+	{
+		float t = SDL_GetTicks();
+		t *= 0.001f;
+
+		return t;
+	}
+}
