@@ -39,17 +39,17 @@ void RenderWindow::clear()
 
 void RenderWindow::render(Entity& entity)
 {
-	SDL_Rect src;
+	SDL_Rect src{};
 	src.x = entity.GetCurrentFrame().x;
 	src.y = entity.GetCurrentFrame().y;
 	src.w = entity.GetCurrentFrame().w;
 	src.h = entity.GetCurrentFrame().h;
 
-	SDL_Rect dst;
+	SDL_Rect dst{};
 	dst.x = entity.getPos().m_x * 4;
 	dst.y = entity.getPos().m_y * 4;
-	dst.w = entity.GetCurrentFrame().w * 4;
-	dst.h = entity.GetCurrentFrame().h * 4;
+	dst.w = entity.GetCurrentFrame().w;
+	dst.h = entity.GetCurrentFrame().h;
 
 	SDL_RenderCopy(m_Renderer, entity.GetTexture(), &src, &dst);
 }

@@ -11,6 +11,17 @@
 
 // https://lazyfoo.net/tutorials/SDL/index.php#Optimized%20Surface%20Loading%20and%20Soft%20Stretching
 
+enum KeyPressSurfaces
+{
+	KEY_PRESS_DEFAULT,
+	KEY_PRESS_UP,
+	KEY_PRESS_DOWN,
+	KEY_PRESS_LEFT,
+	KEY_PRESS_RIGHT,
+	KEY_PRESS_TOTAL
+};
+
+
 int main(int argc, char* argv[])
 {
 	if (SDL_Init(SDL_INIT_VIDEO) > 0)
@@ -35,20 +46,21 @@ int main(int argc, char* argv[])
 
 	std::vector<Entity> entities = 
 	{
-		Entity(Vector2f(0, 0), grassTexture),
-		Entity(Vector2f(30, 0), grassTexture),
-		Entity(Vector2f(30, 30), grassTexture),
-		Entity(Vector2f(30, 60), grassTexture),
-		Entity(Vector2f(30, 90), grassTexture)
+		Entity(Vector2f(0, 0), grassTexture, 1.0f, 1.0f),
+		Entity(Vector2f(30, 0), grassTexture, 1.0f, 1.0f),
+		Entity(Vector2f(30, 30), grassTexture, 1.0f, 1.0f),
+		Entity(Vector2f(30, 60), grassTexture, 1.0f, 1.0f),
+		Entity(Vector2f(30, 90), grassTexture, 1.0f, 1.0f)
 	};
 
-	Entity Bob(Vector2f(100, 50), bob);
-	entities.emplace_back(Bob);
+	Entity Bob(Vector2f(30, 100), bob, 1.0f, 1.0f);
 
 	bool running = true;
 	SDL_Event event;
 
-	const float deltaTime = 0.01f;
+	const float deltaTime = 1.0f / 60.0f;
+	const int tileSize = 32;
+	const float velocity = 1.0f;
 	float accumulator = 0.0f;
 	float currentTime = Utils::hireTimeInSeconds();
 
@@ -67,6 +79,27 @@ int main(int argc, char* argv[])
 				{
 					running = false;
 				}
+				else if(event.type == SDL_KEYDOWN)
+				{
+					switch (event.key.keysym.sym)
+					{
+					case SDLK_RIGHT:
+						Bob.getPos().m_x += tileSize * deltaTime * velocity;
+						break;
+					case SDLK_LEFT:
+						Bob.getPos().m_x -= tileSize * deltaTime * velocity;
+						break;
+					case SDLK_UP:
+						Bob.getPos().m_y -= tileSize * deltaTime * velocity;
+						break;
+					case SDLK_DOWN:
+						Bob.getPos().m_y += tileSize * deltaTime * velocity;
+						break;
+					default:
+						Bob.getPos().print();
+						break;
+					}
+				}
 			}
 
 			accumulator -= deltaTime;
@@ -79,6 +112,7 @@ int main(int argc, char* argv[])
 		for (Entity& ent : entities)
 		{
 			window.render(ent);
+			window.render(Bob);
 		}
 
 		window.display();
