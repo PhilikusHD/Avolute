@@ -59,3 +59,6 @@ Instead I'll use good ol' [SDL](https://www.libsdl.org/) and [OpenGL](https://ww
 ## Q&A
 #### Aren't those too many features?
   > Yes, those 100% are too many features and I will most likely not add all of them.  
+
+#### Do you have a "dynamic fetish"
+  > Yes, I do

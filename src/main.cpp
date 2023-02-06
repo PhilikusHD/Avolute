@@ -4,10 +4,13 @@
 #include <SDL.h>	
 #include <SDL_image.h>
 #include <vector>
+#include <memory>
+
 
 #include "Utils.h"
 #include "RenderWindow.h"
 #include "Entity.h"
+#include "Avolute.h"
 
 // https://lazyfoo.net/tutorials/SDL/index.php#Optimized%20Surface%20Loading%20and%20Soft%20Stretching
 
@@ -20,7 +23,6 @@ enum KeyPressSurfaces
 	KEY_PRESS_RIGHT,
 	KEY_PRESS_TOTAL
 };
-
 
 int main(int argc, char* argv[])
 {
@@ -37,14 +39,9 @@ int main(int argc, char* argv[])
 	SDL_Texture* grassTexture = window.loadTexture("res/Textures/ground_grass_1.png");
 	SDL_Texture* bob = window.loadTexture("res/Textures/bob.png");
 	
-	//Entity entitees[3] =
-	//{
-	//	Entity(69, 100, grassTexture), 
-	//	Entity(42, 100, grassTexture),
-	//	Entity(100, 100, grassTexture)
-	//};
+	Entity test;
 
-	std::vector<Entity> entities = 
+	std::vector<Entity> entities =
 	{
 		Entity(Vector2f(0, 0), grassTexture, 1.0f, 1.0f),
 		Entity(Vector2f(30, 0), grassTexture, 1.0f, 1.0f),
@@ -53,6 +50,7 @@ int main(int argc, char* argv[])
 		Entity(Vector2f(30, 90), grassTexture, 1.0f, 1.0f)
 	};
 
+
 	Entity Bob(Vector2f(30, 100), bob, 1.0f, 1.0f);
 
 	bool running = true;
@@ -60,7 +58,7 @@ int main(int argc, char* argv[])
 
 	const float deltaTime = 1.0f / 60.0f;
 	const int tileSize = 32;
-	const float velocity = 1.0f;
+	float velocity = 1.0f;
 	float accumulator = 0.0f;
 	float currentTime = Utils::hireTimeInSeconds();
 
@@ -83,17 +81,17 @@ int main(int argc, char* argv[])
 				{
 					switch (event.key.keysym.sym)
 					{
-					case SDLK_RIGHT:
-						Bob.getPos().m_x += tileSize * deltaTime * velocity;
+					case SDLK_d:
+						Bob.getPos().m_x += tileSize * accumulator * velocity;
 						break;
-					case SDLK_LEFT:
-						Bob.getPos().m_x -= tileSize * deltaTime * velocity;
+					case SDLK_a:
+						Bob.getPos().m_x -= tileSize * accumulator * velocity;
 						break;
-					case SDLK_UP:
-						Bob.getPos().m_y -= tileSize * deltaTime * velocity;
+					case SDLK_w:
+						Bob.getPos().m_y -= tileSize * accumulator * velocity;
 						break;
-					case SDLK_DOWN:
-						Bob.getPos().m_y += tileSize * deltaTime * velocity;
+					case SDLK_s:
+						Bob.getPos().m_y += tileSize * accumulator * velocity;
 						break;
 					default:
 						Bob.getPos().print();

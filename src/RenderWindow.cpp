@@ -46,8 +46,8 @@ void RenderWindow::render(Entity& entity)
 	src.h = entity.GetCurrentFrame().h;
 
 	SDL_Rect dst{};
-	dst.x = entity.getPos().m_x * 4;
-	dst.y = entity.getPos().m_y * 4;
+	dst.x = (int)entity.getPos().m_x * 4;
+	dst.y = (int)entity.getPos().m_y * 4;
 	dst.w = entity.GetCurrentFrame().w;
 	dst.h = entity.GetCurrentFrame().h;
 

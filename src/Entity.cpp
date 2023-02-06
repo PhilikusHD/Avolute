@@ -1,5 +1,10 @@
 #include "Entity.h"
 
+Entity::Entity()
+	: m_pos(getPos()), m_tex(GetTexture())
+{
+}
+
 Entity::Entity(Vector2f pos, SDL_Texture* tex, float scaleX, float scaleY)
 	:m_pos(pos), m_tex(tex)
 {
