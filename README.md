@@ -1,5 +1,5 @@
 # Avolute
-Avolute, a Pokemon-esque game
+Avolute, a Pokemon-esque game. This Project is currently set on hold because I am busy with making my Game Engine, will come back to this though
 
 ## The Concept
 My goal with this project is not to make the next AAA game with cool ass graphics or stuff like that.
