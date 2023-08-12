@@ -40,7 +40,7 @@ file(GLOB_RECURSE SRC Avolute/*.cpp)
 add_executable(Avolute ${SRC})
 
 # Link SDL2, spdlog, and glm to your executable
-target_link_libraries(Avolute PUBLIC SDL2main SDL2-static spdlog glm)
+target_link_libraries(Avolute PUBLIC SDL2-static spdlog glm)
 
 # Add subdirectory for SDL_image
 add_subdirectory(vendor/SDL_image)
