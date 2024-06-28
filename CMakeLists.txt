@@ -26,11 +26,13 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/vendor/glm
     ${CMAKE_SOURCE_DIR}/vendor/SDL2/include
     ${CMAKE_SOURCE_DIR}/vendor/SDL_image
+    ${CMAKE_SOURCE_DIR}/vendor/imgui
 )
 
 # Add subdirectories for other dependencies
 add_subdirectory(vendor/spdlog vendor/spdlog)
 add_subdirectory(vendor/glm)
+add_subdirectory(vendor/imgui)
 
 # Build SDL2 as a static library
 add_subdirectory(vendor/SDL2)
@@ -40,7 +42,7 @@ file(GLOB_RECURSE SRC Avolute/*.cpp)
 add_executable(Avolute ${SRC})
 
 # Link SDL2, spdlog, and glm to your executable
-target_link_libraries(Avolute PUBLIC SDL2-static spdlog glm)
+target_link_libraries(Avolute PUBLIC SDL2-static spdlog glm ImGui)
 
 # Add subdirectory for SDL_image
 add_subdirectory(vendor/SDL_image)

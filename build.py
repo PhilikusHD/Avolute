@@ -26,7 +26,9 @@ def debug_or_release():
     """
     choice = input("Do You Want To Debug Or Release: ").capitalize()
     if choice == "Debug" or choice == "Release":
-        cmake_cmd = f"cmake -G \"Ninja\" -DCMAKE_BUILD_TYPE={choice} ."
+
+        cmake_cmd = f"cmake -G \"Ninja\" -S ../ -DCMAKE_BUILD_TYPE={choice} -B ."
+
         os.system(cmake_cmd)
     else:
         print_colored("Wrong Choice", 31)
@@ -45,22 +47,6 @@ def compiling():
 
 
 def run_build_setup():
-
-    build_start = time.time()
-    shader_directory = "Blackbird/assets/shaders"
-    output_directory = shader_directory
-    shader_endings = (".vert", ".frag", ".comp", ".tesc", ".tese", ".geom")
-    total_compilation_time = 0
-    # Compile shaders
-    for root, _, files in os.walk(shader_directory):
-        for filename in files:
-            if filename.endswith(shader_endings):
-                shader_name, _ = os.path.splitext(filename)  # Splitting filename and extension
-                input_file = os.path.join(root, filename)
-                output_file = os.path.join(output_directory, f"{shader_name}.spv")
-                compile_time_ms = compile_shaders(input_file, output_file)
-                print_colored(f"Compiled {shader_name} -> {output_file}, Took: {compile_time_ms:.2f}ms", 32)
-
     # Compile and build the project
     compiling()
 
@@ -93,22 +79,6 @@ def main():
             print("Invalid argument. Usage: python3 build.py [--release|--debug]")
             sys.exit(1)
     else:
-        # No argument provided, run default behavior
-        shader_directory = "Blackbird/assets/shaders"
-        output_directory = shader_directory
-
-        shader_endings = (".vert", ".frag", ".comp", ".tesc", ".tese", ".geom")
-        total_compilation_time = 0
-
-        # Compile shaders
-        for root, _, files in os.walk(shader_directory):
-            for filename in files:
-                if filename.endswith(shader_endings):
-                    shader_name, _ = os.path.splitext(filename)  # Splitting filename and extension
-                    input_file = os.path.join(root, filename)
-                    output_file = os.path.join(output_directory, f"{shader_name}.spv")
-                    compile_time_ms = compile_shaders(input_file, output_file)
-                    print_colored(f"Compiled {shader_name} -> {output_file}, Took: {compile_time_ms:.2f}ms", 32)
 
         # Configure and build the project
         print_colored("Configuring project...", 36)
